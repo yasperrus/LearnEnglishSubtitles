@@ -64,7 +64,7 @@ class TestLevel(QWidget):
         self.setWindowTitle(f"Тест уровень 0. Список - {title}")
 
     def load_ui(self):
-        ui_file = os.path.join(base_path(), "res", "uis", "test_level.ui")
+        ui_file = os.path.join(ROOT_DIR, "res", "uis", "test_level.ui")
         self.window = uic.loadUi(ui_file, self)
 
     def set_setting_view_word(self):
@@ -126,13 +126,11 @@ class TestLevel(QWidget):
 
     def load_audio(self, word_name: str):
         self.but_speak.setEnabled(False)
-        if os.path.exists(os.path.join(base_path(), "res", "audios", word_name)):
+        if os.path.exists(os.path.join(ROOT_DIR, "res", "audios", word_name)):
             if (
                 len(
                     fnmatch.filter(
-                        os.listdir(
-                            os.path.join(base_path(), "res", "audios", word_name)
-                        ),
+                        os.listdir(os.path.join(ROOT_DIR, "res", "audios", word_name)),
                         "*.mp3",
                     )
                 )
@@ -141,10 +139,10 @@ class TestLevel(QWidget):
                 self.learning_words[self.current_position].isAudio = True
                 self.but_speak.setEnabled(True)
                 random_filename = choice(
-                    os.listdir(os.path.join(base_path(), "res", "audios", word_name))
+                    os.listdir(os.path.join(ROOT_DIR, "res", "audios", word_name))
                 )
                 pygame.mixer.music.load(
-                    os.path.join(base_path(), "res", "audios", word_name)
+                    os.path.join(ROOT_DIR, "res", "audios", word_name)
                     + "/"
                     + random_filename
                 )
