@@ -32,7 +32,7 @@ class UserRepository:
                 return None
             return user
 
-    def get_by_id(self, id: int):
+    def get(self, id: int):
         with SessionLocal() as s:
             user: User = s.query(User).filter(User.id == id).one_or_none()
             if not user:

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>739</width>
-    <height>541</height>
+    <width>688</width>
+    <height>469</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,35 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <widget class="QWidget" name="centralwidget">
+  <widget class="QWidget" name="main_widget">
    <property name="styleSheet">
-    <string notr="true">#centralwidget	{
+    <string notr="true">#main_widget	{
 background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:1, stop:0 rgba(255, 0, 57, 255), stop:0.994924 rgba(3, 0, 255, 255));
+}
+
+QPushButton {
+	border-radius: 8px;
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border: 1px solid #ffffff;
+	background-color: rgba(255, 255, 255, 120); 
+	color: black;  
+}
+
+QPushButton:hover {
+    background-color: rgba(255, 255, 255, 150); /* немного менее прозрачный при наведении */
+}
+
+QPushButton:pressed {
+    background-color: rgba(255, 255, 255, 192); /* чуть плотнее при нажатии */
+}
+
+QWidget, QLabel, QPushButton {
+    color: #111;
 }</string>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
@@ -39,10 +64,10 @@ background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:1, stop:0 rgb
      <number>0</number>
     </property>
     <item>
-     <widget class="QWidget" name="listWidget" native="true">
+     <widget class="QWidget" name="list_widget" native="true">
       <property name="styleSheet">
-       <string notr="true">#listWidget	{
-background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:1, stop:0 rgba(255, 0, 57, 255), stop:0.994924 rgba(3, 0, 255, 255));
+       <string notr="true">#list_widget	{
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:1, stop:0 rgba(255, 0, 57, 255), stop:1 rgba(3, 0, 255, 255));
 }</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -102,7 +127,7 @@ QTabBar::tab:hover {
           </property>
           <attribute name="icon">
            <iconset>
-            <normaloff>../../../../../.designer/icons/to-do-list.png</normaloff>../../../../../.designer/icons/to-do-list.png</iconset>
+            <normaloff>../../../../../../../../.designer/icons/to-do-list.png</normaloff>../../../../../../../../.designer/icons/to-do-list.png</iconset>
           </attribute>
           <attribute name="title">
            <string>Списки</string>
@@ -131,7 +156,7 @@ QTabBar::tab:hover {
          <widget class="QWidget" name="page_hide_lists">
           <attribute name="icon">
            <iconset>
-            <normaloff>../../../../../.designer/icons/to-do-list_2.png</normaloff>../../../../../.designer/icons/to-do-list_2.png</iconset>
+            <normaloff>../../../../../../../../.designer/icons/to-do-list_2.png</normaloff>../../../../../../../../.designer/icons/to-do-list_2.png</iconset>
           </attribute>
           <attribute name="title">
            <string>Скрытые списки</string>
@@ -160,31 +185,11 @@ QTabBar::tab:hover {
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="right_bar_widget" native="true">
+     <widget class="QWidget" name="config_widget" native="true">
       <property name="styleSheet">
-       <string notr="true">#right_bar_widget{
+       <string notr="true">#config_widget	{
 	border: 1px solid #ffffff;
-	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:1, stop:0 rgba(3, 0, 255, 255), stop:1 rgba(255, 0, 57, 255));
-}
-QPushButton {
-	border-radius: 8px;
-	margin-left: 10px;
-	margin-right: 10px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-left: 15px;
-	padding-right: 15px;
-	border: 1px solid #ffffff;
-	background-color: rgba(255, 255, 255, 120); 
-	color: black;  
-}
-
-QPushButton:hover {
-    background-color: rgba(255, 255, 255, 150); /* немного менее прозрачный при наведении */
-}
-
-QPushButton:pressed {
-    background-color: rgba(255, 255, 255, 192); /* чуть плотнее при нажатии */
+	background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:1, stop:0 rgba(3, 0, 255, 255), stop:1 rgba(9, 0, 57, 255));
 }</string>
       </property>
       <layout class="QVBoxLayout" name="layout_buttons" stretch="0,0,0,0,0">
@@ -210,7 +215,7 @@ QPushButton:pressed {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../../../../../.designer/icons/edit_2.png</normaloff>../../../../../.designer/icons/edit_2.png</iconset>
+           <normaloff>../../../../../../../../.designer/icons/edit_2.png</normaloff>../../../../../../../../.designer/icons/edit_2.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -233,7 +238,7 @@ QPushButton:pressed {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../../../../../.designer/icons/files.png</normaloff>../../../../../.designer/icons/files.png</iconset>
+           <normaloff>../../../../../../../../.designer/icons/files.png</normaloff>../../../../../../../../.designer/icons/files.png</iconset>
          </property>
         </widget>
        </item>
@@ -244,7 +249,7 @@ QPushButton:pressed {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../../../../../.designer/icons/setting.png</normaloff>../../../../../.designer/icons/setting.png</iconset>
+           <normaloff>../../../../../../../../.designer/icons/setting.png</normaloff>../../../../../../../../.designer/icons/setting.png</iconset>
          </property>
         </widget>
        </item>
@@ -262,7 +267,7 @@ QPushButton:pressed {
         </spacer>
        </item>
        <item>
-        <widget class="QWidget" name="profilewidget" native="true">
+        <widget class="QWidget" name="profile_widget" native="true">
          <property name="styleSheet">
           <string notr="true">QWidget {
 
@@ -357,7 +362,7 @@ border: none;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../icons/refresh_2.png</normaloff>../icons/refresh_2.png</iconset>
+              <normaloff>../../../../../.designer/icons/refresh_2.png</normaloff>../../../../../.designer/icons/refresh_2.png</iconset>
             </property>
            </widget>
           </item>
@@ -376,7 +381,7 @@ border: none;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../../../../../.designer/icons/exit.png</normaloff>../../../../../.designer/icons/exit.png</iconset>
+              <normaloff>../../../../../../../../.designer/icons/exit.png</normaloff>../../../../../../../../.designer/icons/exit.png</iconset>
             </property>
             <property name="iconSize">
              <size>

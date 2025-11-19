@@ -6,6 +6,7 @@ from .PathOfSpeech import PathOfSpeech
 from .Statuses import Statuses
 from .SubtitleList import SubtitleList
 from .SubtitleListAssociationWord import SubtitleListAssociationWord
+from .Theme import Theme
 from .User import User
 from .UserAssociationSubtitleList import UserAssociationSubtitleList
 from .WordWithTranslations import WordWithTranslations

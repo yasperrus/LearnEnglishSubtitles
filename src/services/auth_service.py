@@ -3,14 +3,17 @@ import secrets
 import bcrypt
 
 from src.core.auth import verify_password
+from src.core.theme_manager import ThemeManager
 from src.data.User import User
 from src.db.session import SessionLocal
+from src.repositories.theme_repository import ThemeRepository
 from src.repositories.user_repository import UserRepository
 
 
 class AuthService:
     def __init__(self):
-        self.repo = UserRepository()
+        self.repo_user = UserRepository()
+        self.repo_theme = ThemeRepository()
 
     def register(self, name, password):
         hashed = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
@@ -20,13 +23,15 @@ class AuthService:
         return True
 
     def authenticate(self, name: str, password: str):
-        user: User = self.repo.get_by_name(name)
+        user: User = self.repo_user.get_by_name(name)
         if not user:
             return None
         if verify_password(password, user.password):
             token = secrets.token_hex(32)
-            self.repo.set_token_by_id(user.id, token)
+            self.repo_user.set_token_by_id(user.id, token)
             user.session_token = token
+            theme = self.repo_theme.get_by_user_id(user.id)
+            ThemeManager().set_theme(theme)
             return user
         return None
 
@@ -42,3 +47,8 @@ class AuthService:
         user = db.query(User).filter(User.session_token == token).one()
         user.session_token = None
         db.commit()
+
+    def apply_theme(self):
+        """Применяем тему для пользователя, если он авторизован"""
+        if self.theme_manager:
+            self.theme_manager.apply_theme()

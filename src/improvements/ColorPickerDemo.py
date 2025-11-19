@@ -1,5 +1,6 @@
 import sys
 
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QColorDialog
 
 
@@ -14,11 +15,11 @@ class ColorDemo(QWidget):
         self.button.move(140, 130)
 
     def choose_color(self):
-        color = QColorDialog.getColor()  # открываем стандартный диалог
+        color = QColorDialog.getColor(options=QColorDialog.ShowAlphaChannel)
         if color.isValid():
             # Печатаем разные форматы
-            print("HEX:", color.name())  # #RRGGBB
-            print("RGB:", color.red(), color.green(), color.blue())
+            print("HEX:", color.name(QColor.HexArgb))  # #RRGGBB
+            print("RGB:", color.red(), color.green(), color.blue(), color.alpha())
             print("HSL:", color.hue(), color.saturation(), color.lightness())
             r = color.red()
             g = color.green()

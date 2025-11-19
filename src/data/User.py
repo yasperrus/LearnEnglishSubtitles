@@ -4,6 +4,7 @@ from typing import List
 from sqlalchemy import func
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 
+from src.data import Theme
 from src.data.Base import Base
 from .LearnedWord import LearnedWord
 from .LearningWord import LearningWord
@@ -52,4 +53,10 @@ class User(Base):
     learned_words_association: Mapped[List["LearnedWord"]] = relationship(
         "LearnedWord",
         back_populates="user",
+    )
+
+    theme: Mapped["Theme"] = relationship(
+        back_populates="user",
+        uselist=False,
+        cascade="all, delete",
     )

@@ -6,6 +6,7 @@ from PyQt5.QtCore import QSettings, pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import QMainWindow, QApplication
 
 from config import ROOT_DIR
+from src.core.theme_manager import ThemeManager
 from src.data.SubtitleList import SubtitleList
 from src.data.User import User
 from src.repositories.learned_word_repository import LearnedWordRepository
@@ -14,6 +15,7 @@ from src.repositories.user_repository import UserRepository
 from src.repositories.word_repository import WordRepository
 from src.widgets.CreateListWords_2 import CreateListWords_2
 from src.widgets.ViewListWords import ViewListWords
+from src.widgets.ViewSettings import ViewSettings
 from src.widgets.WidgetVerticalLayoutScrollForSubtitleList import (
     WidgetVerticalLayoutScrollForSubtitleList,
 )
@@ -35,12 +37,49 @@ class Main(QMainWindow):
         )
         self.learned_words = self.learned_words_repo.gets_by_user_id(self.user.id)
         self.words_learned = self.word_repo.get_words_learned_by_user_id(self.user.id)
+
         self.init_ui()
+        ThemeManager().subscribe(self)
         self.setWindowTitle("Главная страница")
+
+    def apply_theme(self, theme):
+        if not theme:
+            return
+
+        self.config_widget.setVisible(True)
+        self.config_widget.setStyleSheet(
+            f"""#config_widget {{
+                 background: qlineargradient(
+                    spread:pad,
+                    x1:0, y1:1, x2:1, y2:1,
+                    stop:0 {theme.secondary_bg},
+                    stop:1 {theme.primary_bg}
+                )
+             }}
+             QWidget, QLabel, QPushButton {{
+                color: {theme.text_color};
+             }}
+             """
+        )
+        self.list_widget.setVisible(True)
+        self.list_widget.setStyleSheet(
+            f"""#list_widget {{
+                 background: qlineargradient(
+                    spread:pad,
+                    x1:0, y1:1, x2:1, y2:1,
+                    stop:0 {theme.primary_bg},
+                    stop:1 {theme.secondary_bg}
+                );
+             }}
+             QWidget, QLabel, QPushButton {{
+                color: {theme.text_color};
+             }}
+             """
+        )
 
     def init_ui(self):
         ui_file = os.path.join(ROOT_DIR, "res", "uis", "main.ui")
-        self.window = uic.loadUi(ui_file, self)
+        uic.loadUi(ui_file, self)
         # uic.loadUi(ui_file, self)
         opened_subtitle_lists = [s for s in self.subtitle_lists if s.is_hide == False]
         hidden_subtitle_lists = [s for s in self.subtitle_lists if s.is_hide == True]
@@ -58,7 +97,7 @@ class Main(QMainWindow):
 
         self.label_user_name.setText(self.user.name)
         self.show_quantity_learned_words()
-        self.but_setting.setHidden(True)
+        self.but_setting.setHidden(False)
         self.settings_ui()
 
     def but_hide_clicked(self, subtitle_list: SubtitleList):
@@ -76,6 +115,10 @@ class Main(QMainWindow):
             self.move(self.settings.value("window position"))
         except:
             pass
+
+    def on_but_setting_released(self):
+        ui = ViewSettings(self.user)
+        ui.show()
 
     def on_but_learned_words_released(self):
         view = ViewListWords(self.words_learned, self.learned_words, self.user.id)
@@ -108,7 +151,7 @@ class Main(QMainWindow):
 
 def test_run():
     repo_user = UserRepository()
-    user = repo_user.get_by_id(1)
+    user = repo_user.get(1)
 
     app = QApplication(sys.argv)
     win = Main(user)
