@@ -50,5 +50,6 @@ class AuthService:
 
     def apply_theme(self):
         """Применяем тему для пользователя, если он авторизован"""
-        if self.theme_manager:
-            self.theme_manager.apply_theme()
+        if hasattr(self, "theme_manager"):
+            if self.theme_manager:
+                self.theme_manager.apply_theme()

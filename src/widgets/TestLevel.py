@@ -6,19 +6,21 @@ from random import choice
 from threading import Timer
 
 import pygame
-from PyQt5 import uic
+from PyQt5 import uic, QtCore
 from PyQt5.QtCore import Qt, QSettings
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtWidgets import QWidget, QApplication
 
 from config import ROOT_DIR
+from src.core.theme_manager import ThemeManager
 from src.data import LearningWord
 from src.db.session import SessionLocal
 from src.repositories.learning_word_repository_live import LearningWordRepositoryLive
 from src.repositories.subtitle_list_repository import SubtitleListRepository
+from src.widgets.ThemeWidget import ThemeWidget
 
 
-class TestLevel(QWidget):
+class TestLevel(QWidget, ThemeWidget):
     REWARD_COST = 1
     REWARD_IF = 1
 
@@ -36,7 +38,8 @@ class TestLevel(QWidget):
         subtitle_list_id: int,
         title: str = "",
     ):
-        super().__init__()
+        QWidget.__init__(self)
+        ThemeWidget.__init__(self)
         self.user_id = user_id
         self.subtitle_list_id = subtitle_list_id
         session = SessionLocal()
@@ -47,6 +50,10 @@ class TestLevel(QWidget):
 
         self.words_original = self.learning_words
         self.load_ui()
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # делаем фон прозрачным
+        current_theme = ThemeManager().get_theme()
+        if current_theme:
+            self.apply_theme(current_theme)
         self.set_title(title)
         self.settings = QSettings("TestWindow", "LearnEnglish")
         try:

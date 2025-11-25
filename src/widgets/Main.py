@@ -1,7 +1,7 @@
 import os
 import sys
 
-from PyQt5 import uic
+from PyQt5 import uic, QtCore
 from PyQt5.QtCore import QSettings, pyqtSignal, pyqtSlot
 from PyQt5.QtWidgets import QMainWindow, QApplication
 
@@ -14,6 +14,7 @@ from src.repositories.subtitle_list_repository import SubtitleListRepository
 from src.repositories.user_repository import UserRepository
 from src.repositories.word_repository import WordRepository
 from src.widgets.CreateListWords_2 import CreateListWords_2
+from src.widgets.ThemeWidget import ThemeWidget
 from src.widgets.ViewListWords import ViewListWords
 from src.widgets.ViewSettings import ViewSettings
 from src.widgets.WidgetVerticalLayoutScrollForSubtitleList import (
@@ -22,11 +23,12 @@ from src.widgets.WidgetVerticalLayoutScrollForSubtitleList import (
 
 
 # Нужно сохранить сколько выученных слов после обновления в базе данных
-class Main(QMainWindow):
+class Main(QMainWindow, ThemeWidget):
     logout_requested = pyqtSignal()
 
     def __init__(self, user: User):
-        super().__init__()
+        QMainWindow.__init__(self)
+        ThemeWidget.__init__(self)
         self.user = user
         self.subtitle_list_repo = SubtitleListRepository()
         self.learned_words_repo = LearnedWordRepository()
@@ -39,43 +41,11 @@ class Main(QMainWindow):
         self.words_learned = self.word_repo.get_words_learned_by_user_id(self.user.id)
 
         self.init_ui()
-        ThemeManager().subscribe(self)
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # делаем фон прозрачным
+        current_theme = ThemeManager().get_theme()
+        if current_theme:
+            self.apply_theme(current_theme)
         self.setWindowTitle("Главная страница")
-
-    def apply_theme(self, theme):
-        if not theme:
-            return
-
-        self.config_widget.setVisible(True)
-        self.config_widget.setStyleSheet(
-            f"""#config_widget {{
-                 background: qlineargradient(
-                    spread:pad,
-                    x1:0, y1:1, x2:1, y2:1,
-                    stop:0 {theme.secondary_bg},
-                    stop:1 {theme.primary_bg}
-                )
-             }}
-             QWidget, QLabel, QPushButton {{
-                color: {theme.text_color};
-             }}
-             """
-        )
-        self.list_widget.setVisible(True)
-        self.list_widget.setStyleSheet(
-            f"""#list_widget {{
-                 background: qlineargradient(
-                    spread:pad,
-                    x1:0, y1:1, x2:1, y2:1,
-                    stop:0 {theme.primary_bg},
-                    stop:1 {theme.secondary_bg}
-                );
-             }}
-             QWidget, QLabel, QPushButton {{
-                color: {theme.text_color};
-             }}
-             """
-        )
 
     def init_ui(self):
         ui_file = os.path.join(ROOT_DIR, "res", "uis", "main.ui")
@@ -113,6 +83,8 @@ class Main(QMainWindow):
         try:
             self.resize(self.settings.value("window size"))
             self.move(self.settings.value("window position"))
+            index = int(self.settings.value("tab_widget currentIndex", 0))
+            self.tab_widget.setCurrentIndex(index)
         except:
             pass
 
@@ -145,8 +117,12 @@ class Main(QMainWindow):
         self.logout_requested.emit()
 
     def closeEvent(self, event):
+
         self.settings.setValue("window size", self.size())
         self.settings.setValue("window position", self.pos())
+        self.settings.setValue(
+            "tab_widget currentIndex", self.tab_widget.currentIndex()
+        )
 
 
 def test_run():

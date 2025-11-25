@@ -9,7 +9,12 @@ class ThemeManager:
         return cls._instance
 
     def subscribe(self, widget):
-        self._subscribers.append(widget)
+        if widget not in self._subscribers:
+            self._subscribers.append(widget)
+
+            # 👉 ВАЖНО: СРАЗУ применяем текущую тему
+            if self._current_theme is not None:
+                widget.apply_theme(self._current_theme)
 
     def set_theme(self, theme):
         self._current_theme = theme

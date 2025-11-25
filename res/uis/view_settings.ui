@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>567</width>
+    <width>552</width>
     <height>254</height>
    </rect>
   </property>
@@ -97,8 +97,10 @@ border-radius: 5px;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">border-radius: 13px;
-background-color: rgb(255, 255, 255);</string>
+               <string notr="true">QPushButton	{
+border-radius: 13px;
+background-color: rgb(255, 255, 255);
+}</string>
               </property>
               <property name="text">
                <string/>
@@ -159,8 +161,10 @@ border-radius: 5px;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">border-radius: 13px;
-background-color: rgb(255, 255, 255);</string>
+               <string notr="true">QPushButton	{
+border-radius: 13px;
+background-color: rgb(255, 255, 255);
+}</string>
               </property>
               <property name="text">
                <string/>
@@ -218,8 +222,10 @@ border-radius: 5px;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">border-radius: 13px;
-background-color: rgb(255, 255, 255);</string>
+               <string notr="true">QPushButton	{
+border-radius: 13px;
+background-color: rgb(255, 255, 255);
+}</string>
               </property>
               <property name="text">
                <string/>
@@ -298,8 +304,11 @@ border-radius: 5px;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">border-radius: 13px;
-background-color: rgb(255, 255, 255);</string>
+               <string notr="true">QPushButton	{
+border-radius: 13px;
+background-color: rgb(255, 255, 255);
+padding: 0px; margin: 0px; 
+}</string>
               </property>
               <property name="text">
                <string/>
@@ -357,8 +366,11 @@ border-radius: 5px;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">border-radius: 13px;
-background-color: rgb(255, 255, 255);</string>
+               <string notr="true">QPushButton	{
+border-radius: 13px;
+background-color: rgb(255, 255, 255);
+padding: 0px; margin: 0px; 
+}</string>
               </property>
               <property name="text">
                <string/>
@@ -416,8 +428,11 @@ border-radius: 5px;</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">border-radius: 13px;
-background-color: rgb(255, 255, 255);</string>
+               <string notr="true">QPushButton	{
+border-radius: 13px;
+background-color: rgb(255, 255, 255);
+padding: 0px; margin: 0px; 
+}</string>
               </property>
               <property name="text">
                <string/>

@@ -1,12 +1,13 @@
 import os
 import sys
-from typing import List, TYPE_CHECKING
+from typing import List
 
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import pyqtSignal, QFileInfo, QSettings, pyqtSlot
 from PyQt5.QtWidgets import QWidget, QApplication
 
 from config import ROOT_DIR
+from src.core.theme_manager import ThemeManager
 from src.data.LearnedWord import LearnedWord
 from src.data.SubtitleList import SubtitleList
 from src.data.WordWithFrequency import WordWithFrequency
@@ -19,23 +20,21 @@ from src.repositories.word_repository import WordRepository
 from src.scripts.ConvertTextToWordsWithFrequency import ConvertTextToWordsWithFrequency
 from src.scripts.FileReader import FileReader
 from src.widgets.InsertText import InsertText
+from src.widgets.ThemeWidget import ThemeWidget
 from src.widgets.WidgetVerticalLayoutScrollForWordsWithDelete import (
     WidgetVerticalLayoutScrollForWordsWithDelete,
 )
 
-if TYPE_CHECKING:
-    pass
-
 
 # удаление слова из списка не возвращает и не удаляет его из subtitle_list
 # нужно чтоб порядок слов был по проядку суббтитра, чтоб каждое новое слово шло как в себбтитрах
-class CreateListWords_2(QWidget):
+class CreateListWords_2(QWidget, ThemeWidget):
     changed_value = pyqtSignal(SubtitleList)
 
     def __init__(self, user_id: int, learned_words: List[LearnedWord]):
-        super().__init__()
+        QWidget.__init__(self)
+        ThemeWidget.__init__(self)
 
-        self.setWindowTitle("Создать список слов")
         # self.layout_scroll.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
 
         self.user_id = user_id
@@ -45,7 +44,12 @@ class CreateListWords_2(QWidget):
             learned_word.word_id for learned_word in learned_words
         ]
         self.init_ui()
+        current_theme = ThemeManager().get_theme()
+        if current_theme:
+            self.apply_theme(current_theme)
+
         self.update_count_words()
+        self.setWindowTitle("Создать список слов")
 
     def init_ui(self):
         ui_file = os.path.join(ROOT_DIR, "res", "uis", "create_list_words.ui")

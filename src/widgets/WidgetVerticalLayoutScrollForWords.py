@@ -6,6 +6,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication
 
 from config import ROOT_DIR
+from src.core.theme_manager import ThemeManager
 from src.data import LearnedWord
 from src.improvements.Switch3 import (
     replace_checkbox_with_switch,
@@ -22,6 +23,10 @@ class WidgetVerticalLayoutScrollForWords(WidgetVerticalLayoutScroll):
     def __init__(self, items: List, learned_words: List[LearnedWord], user_id: int):
         self.user_id = user_id
         super().__init__(items, learned_words)
+
+        current_theme = ThemeManager().get_theme()
+        if current_theme:
+            self.apply_theme(current_theme)
 
     def init_different(self):
         self.repo_learning_word = LearningWordRepository()

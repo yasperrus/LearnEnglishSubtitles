@@ -33,7 +33,7 @@ def test_run():
     user = repo_user.get_all_relationship_by_id(1)
 
     app = QApplication(sys.argv)
-    win = WidgetVerticalLayoutScrollForWords(user.subtitle_lists[0].words)
+    win = WidgetVerticalLayoutScrollForWords_2(user.subtitle_lists[0].words)
     win.show()
     sys.exit(app.exec())
 
