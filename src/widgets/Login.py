@@ -1,11 +1,10 @@
-import os
 import sys
 
 from PyQt5 import uic
 from PyQt5.QtCore import QSettings, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QApplication, QMessageBox
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data.User import User
 from src.services.auth_service import AuthService
 from src.widgets.Registration import Registration
@@ -21,7 +20,7 @@ class Login(QWidget):
         self.auth = AuthService()
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "login.ui")
+        ui_file = resource_path("res/uis/login.ui")
         self.window = uic.loadUi(ui_file, self)
         self.settings = QSettings("LoginWindow", "LearnEnglish")
         try:

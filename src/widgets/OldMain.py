@@ -1,11 +1,10 @@
-import os
 import sys
 
 from PyQt5 import uic, QtCore
 from PyQt5.QtCore import pyqtSlot, QSettings, pyqtSignal
 from PyQt5.QtWidgets import QMainWindow, QApplication
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data.LearnedWord import LearnedWord
 from src.data.SubtitleList import SubtitleList
 from src.data.User import User
@@ -42,7 +41,7 @@ class OldMain(QMainWindow):
         # self.horizontalLayout_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "main.ui")
+        ui_file = resource_path("res/uis/main.ui")
         self.window = uic.loadUi(ui_file, self)
         self.label_user_name.setText(self.user.name)
         self.settings = QSettings("MainWindow", "LearnEnglish")

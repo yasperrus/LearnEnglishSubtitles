@@ -6,29 +6,32 @@ from random import choice
 from threading import Timer
 
 import pygame
-from PyQt5 import uic
+from PyQt5 import uic, QtCore
 from PyQt5.QtCore import Qt, QSettings
 from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtWidgets import QWidget, QApplication
 
-from config import ROOT_DIR
+from config import resource_path
+from src.core.theme_manager import ThemeManager
 from src.data import LearningWord
 from src.db.session import SessionLocal
 from src.repositories.learning_word_repository_live import LearningWordRepositoryLive
 from src.repositories.subtitle_list_repository import SubtitleListRepository
+from src.widgets.ThemeWidget import ThemeWidget
 
 
-class TestLevel(QWidget):
+class TestLevel(QWidget, ThemeWidget):
     REWARD_COST = 1
     REWARD_IF = 1
 
     current_position = 0
     quantity_correct_answer = 0
 
-    PATH_WAY_ICON_CHECKED = os.path.join(ROOT_DIR, "res", "icons", "checked.png")
-    PATH_WAY_ICON_WRONG = os.path.join(ROOT_DIR, "res", "icons", "wrong.png")
-    PATH_WAY_ICON_EASY = os.path.join(ROOT_DIR, "res", "icons", "easy.png")
-    PATH_WAY_ICON_HARD = os.path.join(ROOT_DIR, "res", "icons", "hard_3.png")
+    PATH_WAY_ICON_CHECKED = resource_path("res/icons/checked.png")
+    PATH_WAY_ICON_WRONG = resource_path("res/icons/wrong.png")
+    PATH_WAY_ICON_EASY = resource_path("res/icons/easy.png")
+    PATH_WAY_ICON_HARD = resource_path("res/icons/hard_3.png")
+
 
     def __init__(
         self,
@@ -36,7 +39,8 @@ class TestLevel(QWidget):
         subtitle_list_id: int,
         title: str = "",
     ):
-        super().__init__()
+        QWidget.__init__(self)
+        ThemeWidget.__init__(self)
         self.user_id = user_id
         self.subtitle_list_id = subtitle_list_id
         session = SessionLocal()
@@ -47,6 +51,10 @@ class TestLevel(QWidget):
 
         self.words_original = self.learning_words
         self.load_ui()
+        self.setAttribute(QtCore.Qt.WA_TranslucentBackground)  # делаем фон прозрачным
+        current_theme = ThemeManager().get_theme()
+        if current_theme:
+            self.apply_theme(current_theme)
         self.set_title(title)
         self.settings = QSettings("TestWindow", "LearnEnglish")
         try:
@@ -64,7 +72,7 @@ class TestLevel(QWidget):
         self.setWindowTitle(f"Тест уровень 0. Список - {title}")
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "test_level.ui")
+        ui_file = resource_path("res/uis/test_level.ui")
         self.window = uic.loadUi(ui_file, self)
 
     def set_setting_view_word(self):
@@ -126,11 +134,11 @@ class TestLevel(QWidget):
 
     def load_audio(self, word_name: str):
         self.but_speak.setEnabled(False)
-        if os.path.exists(os.path.join(ROOT_DIR, "res", "audios", word_name)):
+        if os.path.exists(resource_path(f"res/audios/{word_name}")):
             if (
                 len(
                     fnmatch.filter(
-                        os.listdir(os.path.join(ROOT_DIR, "res", "audios", word_name)),
+                        os.listdir(resource_path(f"res/audios/{word_name}")),
                         "*.mp3",
                     )
                 )
@@ -139,10 +147,10 @@ class TestLevel(QWidget):
                 self.learning_words[self.current_position].isAudio = True
                 self.but_speak.setEnabled(True)
                 random_filename = choice(
-                    os.listdir(os.path.join(ROOT_DIR, "res", "audios", word_name))
+                    os.listdir(resource_path(f"res/audios/{word_name}"))
                 )
                 pygame.mixer.music.load(
-                    os.path.join(ROOT_DIR, "res", "audios", word_name)
+                    resource_path(f"res/audios/{word_name}")
                     + "/"
                     + random_filename
                 )

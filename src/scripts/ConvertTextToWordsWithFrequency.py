@@ -7,12 +7,15 @@ import spacy
 # from nltk.stem import WordNetLemmatizer
 from tabulate import tabulate
 
+from config import resource_path
 from src.data.WordWithFrequency import WordWithFrequency
 from src.scripts.FileReader import FileReader
 
 # nltk.download("words")
 # nltk.download("omw-1.4")
-nlp = spacy.load("en_core_web_sm", disable=["ner"])
+model_path = resource_path("en_core_web_sm")
+
+nlp = spacy.load(model_path, disable=["ner"])
 from collections import Counter
 
 

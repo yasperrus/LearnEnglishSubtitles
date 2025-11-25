@@ -6,7 +6,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import pyqtSignal, QSettings
 from PyQt5.QtWidgets import QWidget, QApplication
 
-from config import ROOT_DIR
+from config import ROOT_DIR, resource_path
 from src.data import LearnedWord
 from src.data.SubtitleList import SubtitleList
 from src.repositories.subtitle_list_repository import SubtitleListRepository
@@ -46,7 +46,7 @@ class EditListWords(QWidget):
             print(f"Error settings window")
 
     def init_different(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "edit_list_words.ui")
+        ui_file = resource_path("res/uis/edit_list_words.ui")
         self.window = uic.loadUi(ui_file, self)
         self.setWindowTitle("Редактировать список")
         self.settings = QSettings("EditListWordsWindow", "LearnEnglish")

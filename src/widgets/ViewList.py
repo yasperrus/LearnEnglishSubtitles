@@ -1,4 +1,3 @@
-import os
 import sys
 from typing import List
 
@@ -8,7 +7,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget, QApplication, QSizePolicy
 from sqlalchemy import inspect
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data.LearnedWord import LearnedWord
 from src.data.SubtitleList import SubtitleList
 from src.db.session import SessionLocal
@@ -27,8 +26,8 @@ class ViewList(QWidget):
     hide_signal = pyqtSignal(SubtitleList)
     delete_signal = pyqtSignal(SubtitleList)
 
-    PATH_WAY_ICON_HIDE = os.path.join(ROOT_DIR, "res", "icons", "hidden.png")
-    PATH_WAY_ICON_VISIBLE = os.path.join(ROOT_DIR, "res", "icons", "visible.png")
+    PATH_WAY_ICON_HIDE = resource_path("res/icons/hidden.png")
+    PATH_WAY_ICON_VISIBLE = resource_path("res/icons/visible.png")
 
     def __init__(
         self,
@@ -71,7 +70,7 @@ class ViewList(QWidget):
         self.rpb.mousePressEvent = self.clicked_progress_bar
 
     def init_different(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "view_list.ui")
+        ui_file = resource_path("res/uis/view_list.ui")
         self.window = uic.loadUi(ui_file, self)
         # uic.loadUi(ui_file, self)
 

@@ -1,4 +1,3 @@
-import os
 import sys
 from typing import List
 
@@ -8,7 +7,7 @@ from PyQt5.QtWidgets import QWidget, QApplication
 from sqlalchemy.orm import Session
 from src.data.KnownWord import KnownWord
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data.WordWithTranslations import WordWithTranslations
 from src.db.session import SessionLocal
 from src.widgets.ViewKnownWord import ViewKnownWord
@@ -34,7 +33,7 @@ class ViewListKnownWords(QWidget):
         )
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "view_list_known_words.ui")
+        ui_file = resource_path("res/uis/view_list_known_words.ui")
         self.window = uic.loadUi(ui_file, self)
         self.setWindowTitle("Известные слова")
         self.settings = QSettings("KnownWordsWindow", "LearnEnglish")

@@ -1,4 +1,4 @@
-import os
+import re
 import re
 import sys
 from typing import List
@@ -7,7 +7,7 @@ from PyQt5 import uic, QtCore
 from PyQt5.QtCore import pyqtSignal, QSettings, QTimer
 from PyQt5.QtWidgets import QWidget, QApplication
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data.SubtitleList import SubtitleList
 from src.data.WordWithTranslations import WordWithTranslations
 from src.repositories.learned_word_repository import LearnedWordRepository
@@ -38,7 +38,7 @@ class EditListWords(QWidget):
         self.update_count()
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "edit_list_words.ui")
+        ui_file = resource_path("res/uis/edit_list_words.ui")
         self.window = uic.loadUi(ui_file, self)
         self.settings = QSettings("EditListWordsWindow", "LearnEnglish")
         try:

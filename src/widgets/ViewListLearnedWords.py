@@ -6,7 +6,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QApplication
 
-from config import ROOT_DIR
+from config import ROOT_DIR, resource_path
 from src.data.LearnedWord import LearnedWord
 from src.data.WordWithFrequency import WordWithFrequency
 from src.data.WordWithTranslations import WordWithTranslations
@@ -19,7 +19,7 @@ from src.widgets.ViewListKnownWords import ViewListKnownWords
 class ViewListLearnedWords(ViewListKnownWords):
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "view_list_known_words.ui")
+        ui_file = resource_path("res/uis/view_list_known_words.ui")
         self.window = uic.loadUi(ui_file, self)
         self.setWindowTitle("Изученные слова")
         self.settings = QSettings("LearnedWordsWindow", "LearnEnglish")

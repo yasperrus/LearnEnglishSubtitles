@@ -3,13 +3,14 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 import src.data  # noqa: F401
+from config import resource_path
 from src.data.Base import Base
 
 # Загружаем переменные окружения из .env файла
 load_dotenv()
 
 # Устанавливаем путь к базе данных (обычная SQLite база)
-uri_db = "/home/chris/PycharmProjects/Projects/LearnEnglishSubtitles/res/db/myTestDBNoCrypt.db"
+uri_db = resource_path("res/db/myTestDBNoCrypt.db")
 print(f"Connecting to database at: {uri_db}")
 
 # Устанавливаем строку подключения к не зашифрованной базе данных

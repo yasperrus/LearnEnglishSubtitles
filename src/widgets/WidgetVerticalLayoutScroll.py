@@ -7,20 +7,26 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtWidgets import QWidget
 
-from config import SUBLIST_PAGE_SIZE, ROOT_DIR
+from config import SUBLIST_PAGE_SIZE, ROOT_DIR, resource_path
+from src.core.theme_manager import ThemeManager
 from src.data import LearnedWord
 from src.repositories.user_repository import UserRepository
+from src.widgets.ThemeWidget import ThemeWidget
 
 if TYPE_CHECKING:
     pass
 
 
-class WidgetVerticalLayoutScroll(QWidget):
+class WidgetVerticalLayoutScroll(QWidget, ThemeWidget):
 
     def __init__(self, items: List, learned_words: List[LearnedWord]):
-        super().__init__()
-
+        QWidget.__init__(self)
+        ThemeWidget.__init__(self)
         self.init_ui()
+        current_theme = ThemeManager().get_theme()
+        if current_theme:
+            self.apply_theme(current_theme)
+
         # self.timer_add = QTimer()
         self.timer_filter = QTimer()
         self.items = items
@@ -38,9 +44,7 @@ class WidgetVerticalLayoutScroll(QWidget):
         self.load_more()
 
     def init_different(self):
-        ui_file = os.path.join(
-            ROOT_DIR, "res", "uis", "widget_vertical_layout_scroll.ui"
-        )
+        ui_file = resource_path("res/uis/widget_vertical_layout_scroll.ui")
         self.window = uic.loadUi(ui_file, self)
         # uic.loadUi(ui_file, self)
         self.setWindowTitle("Список")

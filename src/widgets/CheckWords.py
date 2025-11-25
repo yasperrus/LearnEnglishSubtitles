@@ -1,19 +1,13 @@
-import os
 import sys
-from pathlib import Path
 from typing import List
 
 from PyQt5 import uic
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QWidget
 from sqlalchemy.orm import Session
-from src.data.KnownWord import KnownWord
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data.WordWithTranslations import WordWithTranslations
-
-scriptdir = Path(__file__).resolve().parents[0]
-PATH_WAY_UI = os.path.join(scriptdir, "../uis/check_words.ui")
 
 
 class CheckWords(QWidget):
@@ -31,7 +25,7 @@ class CheckWords(QWidget):
         self.filter_word_and_show_word(self.words_original)
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "check_words.ui")
+        ui_file = resource_path("res/uis/check_words.ui")
         self.window = uic.loadUi(ui_file, self)
 
     def filter_word_and_show_word(self, words: List[WordWithTranslations]):

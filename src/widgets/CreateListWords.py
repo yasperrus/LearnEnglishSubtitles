@@ -4,7 +4,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QWidget
 
-from config import ROOT_DIR
+from config import ROOT_DIR, resource_path
 from src.data.SubtitleList import SubtitleList
 
 
@@ -21,7 +21,7 @@ class CreateListWords(QWidget):
         self.update_count_words()
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "create_list_words.ui")
+        ui_file = resource_path("res/uis/create_list_words.ui")
         self.window = uic.loadUi(ui_file, self)
         self.settings = QSettings("CreateListWordsWindow", "LearnEnglish")
         try:

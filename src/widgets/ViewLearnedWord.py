@@ -1,11 +1,10 @@
-import os
 import sys
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QWidget, QApplication
 from sqlalchemy.orm import Session
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data.LearnedWord import LearnedWord
 from src.data.WordWithTranslations import WordWithTranslations
 from src.db.session import SessionLocal
@@ -21,7 +20,7 @@ class ViewLearnWord(QWidget):
         self.word = word
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "view_learned_word.ui")
+        ui_file = resource_path("res/uis/view_learned_word.ui")
         self.window = uic.loadUi(ui_file, self)
 
     def on_but_learned_released(self):

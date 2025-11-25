@@ -1,4 +1,3 @@
-import os
 import sys
 from random import randint, choice
 
@@ -6,7 +5,7 @@ from PyQt5 import uic
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data import LearningWord
 from src.repositories.subtitle_list_repository import SubtitleListRepository
 from src.widgets.TestLevel import TestLevel
@@ -18,7 +17,7 @@ class TestLevel0(TestLevel):
     REWARD_IF = 2
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "test_level_0.ui")
+        ui_file = resource_path("res/uis/test_level_0.ui")
         self.window = uic.loadUi(ui_file, self)
 
     def set_title(self, title):

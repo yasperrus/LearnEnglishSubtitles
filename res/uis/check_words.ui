@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>274</width>
-    <height>125</height>
+    <width>480</width>
+    <height>208</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -39,7 +39,7 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_3" stretch="1,0">
+    <layout class="QVBoxLayout" name="verticalLayout_3" stretch="2,0">
      <property name="spacing">
       <number>0</number>
      </property>
@@ -86,7 +86,7 @@ background-color: rgba(0,0,0,0);</string>
            <string>0/0</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
           </property>
          </widget>
         </item>
@@ -111,7 +111,7 @@ color: rgb(246, 245, 244);</string>
            <string>Пример слова</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignCenter</set>
+           <set>Qt::AlignmentFlag::AlignCenter</set>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
@@ -124,7 +124,7 @@ color: rgb(246, 245, 244);</string>
        </layout>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignmentFlag::AlignBottom">
       <widget class="QWidget" name="widget" native="true">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -157,7 +157,7 @@ color: rgb(246, 245, 244);</string>
         <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Orientation::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -252,7 +252,7 @@ padding-bottom:2px;
         <item>
          <spacer name="horizontalSpacer_2">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Orientation::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>

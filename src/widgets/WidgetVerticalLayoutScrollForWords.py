@@ -5,7 +5,8 @@ from typing import List
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication
 
-from config import ROOT_DIR
+from config import ROOT_DIR, resource_path
+from src.core.theme_manager import ThemeManager
 from src.data import LearnedWord
 from src.improvements.Switch3 import (
     replace_checkbox_with_switch,
@@ -23,12 +24,14 @@ class WidgetVerticalLayoutScrollForWords(WidgetVerticalLayoutScroll):
         self.user_id = user_id
         super().__init__(items, learned_words)
 
+        current_theme = ThemeManager().get_theme()
+        if current_theme:
+            self.apply_theme(current_theme)
+
     def init_different(self):
         self.repo_learning_word = LearningWordRepository()
         self.learning_words = self.repo_learning_word.gets_by_user_id(self.user_id)
-        ui_file = os.path.join(
-            ROOT_DIR, "res", "uis", "widget_vertical_layout_scroll_for_words.ui"
-        )
+        ui_file = resource_path("res/uis/widget_vertical_layout_scroll_for_words.ui")
         self.window = uic.loadUi(ui_file, self)
         # uic.loadUi(ui_file, self)
         # self.but_is_filter.setChecked(False)

@@ -1,4 +1,3 @@
-import os
 import sys
 from typing import TYPE_CHECKING
 
@@ -6,7 +5,7 @@ from PyQt5 import uic
 from PyQt5.QtCore import QSettings
 from PyQt5.QtWidgets import QWidget, QApplication, QMessageBox
 
-from config import ROOT_DIR
+from config import resource_path
 
 if TYPE_CHECKING:
     pass
@@ -22,7 +21,7 @@ class Registration(QWidget):
         self.auth = AuthService()
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "registration.ui")
+        ui_file = resource_path("res/uis/registration.ui")
         self.window = uic.loadUi(ui_file, self)
         self.settings = QSettings("RegistrationWindow", "LearnEnglish")
         try:

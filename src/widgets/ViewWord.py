@@ -1,10 +1,9 @@
-import os
 import sys
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QWidget, QApplication
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data.WordWithTranslations import WordWithTranslations
 from src.db.session import SessionLocal
 
@@ -21,7 +20,7 @@ class ViewWord(QWidget):
         self.insert_translations_to_combo_box()
 
     def init_different(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "view_word.ui")
+        ui_file = resource_path("res/uis/view_word.ui")
         self.window = uic.loadUi(ui_file, self)
 
     def init_ui(self):

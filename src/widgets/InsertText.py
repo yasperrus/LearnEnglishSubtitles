@@ -1,11 +1,10 @@
-import os
 import sys
 
 from PyQt5 import uic
 from PyQt5.QtCore import pyqtSignal, QSettings
 from PyQt5.QtWidgets import QWidget, QApplication
 
-from config import ROOT_DIR
+from config import resource_path
 from src.data.SubtitleList import SubtitleList
 from src.db.session import SessionLocal
 
@@ -20,7 +19,7 @@ class InsertText(QWidget):
         self.setWindowTitle("Текст")
 
     def load_ui(self):
-        ui_file = os.path.join(ROOT_DIR, "res", "uis", "create_text.ui")
+        ui_file = resource_path("res/uis/create_text.ui")
         self.window = uic.loadUi(ui_file, self)
         self.settings = QSettings("CreateTextWindow", "LearnEnglish")
         try:

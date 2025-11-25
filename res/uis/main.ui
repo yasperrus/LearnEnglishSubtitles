@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>688</width>
+    <width>628</width>
     <height>469</height>
    </rect>
   </property>
@@ -18,9 +18,7 @@
   </property>
   <widget class="QWidget" name="main_widget">
    <property name="styleSheet">
-    <string notr="true">#main_widget	{
-background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:1, stop:0 rgba(255, 0, 57, 255), stop:0.994924 rgba(3, 0, 255, 255));
-}
+    <string notr="true">
 
 QPushButton {
 	border-radius: 8px;
@@ -72,7 +70,7 @@ QWidget, QLabel, QPushButton {
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QTabWidget" name="tabWidge">
+        <widget class="QTabWidget" name="tab_widget">
          <property name="styleSheet">
           <string notr="true">QTabWidget {
 	border: 0px solid #ffffff;
@@ -127,7 +125,7 @@ QTabBar::tab:hover {
           </property>
           <attribute name="icon">
            <iconset>
-            <normaloff>../../../../../../../../.designer/icons/to-do-list.png</normaloff>../../../../../../../../.designer/icons/to-do-list.png</iconset>
+            <normaloff>../icons/to-do-list.png</normaloff>../icons/to-do-list.png</iconset>
           </attribute>
           <attribute name="title">
            <string>Списки</string>
@@ -143,7 +141,7 @@ QTabBar::tab:hover {
             <number>0</number>
            </property>
            <property name="topMargin">
-            <number>0</number>
+            <number>9</number>
            </property>
            <property name="rightMargin">
             <number>0</number>
@@ -156,7 +154,7 @@ QTabBar::tab:hover {
          <widget class="QWidget" name="page_hide_lists">
           <attribute name="icon">
            <iconset>
-            <normaloff>../../../../../../../../.designer/icons/to-do-list_2.png</normaloff>../../../../../../../../.designer/icons/to-do-list_2.png</iconset>
+            <normaloff>../icons/to-do-list_2.png</normaloff>../icons/to-do-list_2.png</iconset>
           </attribute>
           <attribute name="title">
            <string>Скрытые списки</string>
@@ -169,7 +167,7 @@ QTabBar::tab:hover {
             <number>0</number>
            </property>
            <property name="topMargin">
-            <number>0</number>
+            <number>9</number>
            </property>
            <property name="rightMargin">
             <number>0</number>
@@ -215,7 +213,7 @@ QTabBar::tab:hover {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../../../../../../../../.designer/icons/edit_2.png</normaloff>../../../../../../../../.designer/icons/edit_2.png</iconset>
+           <normaloff>../icons/edit_2.png</normaloff>../icons/edit_2.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -238,7 +236,7 @@ QTabBar::tab:hover {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../../../../../../../../.designer/icons/files.png</normaloff>../../../../../../../../.designer/icons/files.png</iconset>
+           <normaloff>../icons/files.png</normaloff>../icons/files.png</iconset>
          </property>
         </widget>
        </item>
@@ -249,7 +247,7 @@ QTabBar::tab:hover {
          </property>
          <property name="icon">
           <iconset>
-           <normaloff>../../../../../../../../.designer/icons/setting.png</normaloff>../../../../../../../../.designer/icons/setting.png</iconset>
+           <normaloff>../icons/setting.png</normaloff>../icons/setting.png</iconset>
          </property>
         </widget>
        </item>
@@ -362,7 +360,7 @@ border: none;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../../../../../.designer/icons/refresh_2.png</normaloff>../../../../../.designer/icons/refresh_2.png</iconset>
+              <normaloff>../icons/refresh_2.png</normaloff>../icons/refresh_2.png</iconset>
             </property>
            </widget>
           </item>
@@ -381,7 +379,7 @@ border: none;</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../../../../../../../../.designer/icons/exit.png</normaloff>../../../../../../../../.designer/icons/exit.png</iconset>
+              <normaloff>../icons/exit.png</normaloff>../icons/exit.png</iconset>
             </property>
             <property name="iconSize">
              <size>
