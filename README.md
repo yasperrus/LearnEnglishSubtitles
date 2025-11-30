@@ -66,8 +66,8 @@
 
 🖥 Windows‑сборка (EXE)
 
-Готовая сборка для Windows доступна в разделе Releases:
-Windows Build 1.0.0
+Готовая сборка для Windows доступна в разделе [Releases](https://github.com/yasperrus/LearnEnglishSubtitles/releases): [Windows Build 1.0.0](https://github.com/yasperrus/LearnEnglishSubtitles/releases)
+
 ---
 
 ## 📄 Релизы
